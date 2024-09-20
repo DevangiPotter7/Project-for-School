@@ -1,0 +1,32 @@
+# Sample recipes database
+recipes = {
+    "spaghetti": ["spaghetti", "tomato sauce", "garlic", "olive oil"],
+    "omelette": ["eggs", "milk", "cheese", "salt", "pepper"],
+    "smoothie": ["banana", "yogurt", "honey", "milk"],
+    "salad": ["lettuce", "tomato", "cucumber", "olive oil"],
+}
+
+def find_recipes(ingredients):
+    available_recipes = []
+    for recipe, recipe_ingredients in recipes.items():
+        if all(ingredient in ingredients for ingredient in recipe_ingredients):
+            available_recipes.append(recipe)
+    return available_recipes
+
+def main():
+    print("Welcome to the Recipe Finder!")
+    ingredients_input = input("Enter the ingredients you have (separated by commas): ")
+    
+    # Process the input
+    ingredients = [ingredient.strip().lower() for ingredient in ingredients_input.split(",")]
+    
+    # Find recipes
+    available_recipes = find_recipes(ingredients)
+
+    if available_recipes:
+        print("You can make the following recipes:")
+        for recipe in available_recipes:
+            print(f"- {recipe.capitalize()}")
+    else:
+        print("Sorry, no recipes can be made with those ingredients.")
+
